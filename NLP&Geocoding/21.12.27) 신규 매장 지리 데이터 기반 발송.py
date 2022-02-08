@@ -83,7 +83,7 @@ def csv_raw_import() :
     df_raw = pd.read_csv('all_cust_result.csv')
 
     pg_engine = pg_connect(hk_user, hk_password, hk_dbname, hk_host)
-    df_raw.to_sql('cust_location', con=pg_engine, schema='dt_crm', if_exists='replace', chunksize=10000, index=False, method='multi')
+    df_raw.to_sql('', con=pg_engine, schema='', if_exists='replace', chunksize=10000, index=False, method='multi')
 
     print('DB 적재를 완료되었습니다.')
     print("***************************************\n\n")
@@ -532,7 +532,7 @@ def generate_access_token(clientid: str, clientsecret: str) -> str:
 if __name__ == '__main__' : 
 #     old_locate_df = csv_raw_import() # DB 적재 이슈 시, 과거에 추출한 전체 데이터 csv 파일을 DB에 Replace
     
-    old_locate_df = old_cust_locate_load() #D B상에 적재되어있는 데이터 Load
+    old_locate_df = old_cust_locate_load() #DB상에 적재되어있는 데이터 Load
     cust_info_df = cust_info_load() # 고객 데이터 Load
     old_delv_df, old_home_df = split_old_locate_data(old_locate_df) # DB상에 적재되어있는 데이터 분리(주소지/배송지)
     new_delv_df = new_cust_delv_load(old_delv_df, cust_info_df) # 추가 혹은 갱신된 배송지 위경도 추출 후 반영
