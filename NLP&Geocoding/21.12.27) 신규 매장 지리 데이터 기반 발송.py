@@ -99,7 +99,7 @@ def old_cust_locate_load() :
     
     sql_query = """
                 SELECT *
-                FROM dt_crm.cust_location
+                FROM 
                 """
     cur.execute(sql_query)
     conn.commit()
@@ -121,7 +121,7 @@ def cust_info_load() :
     
     sql_query = """
                 SELECT cid__c as cid, recv_sms__c as recv_sms, address1__c as addr, join_date__c as date
-                FROM salesforceprod.v_personaccount
+                FROM 
                 WHERE name not in ('탈퇴고객')
                 and ispersonaccount = True
                 and recv_sms__c = 'Y'
@@ -162,7 +162,7 @@ def new_cust_delv_load(df_delv, df_cust_raw) :
     con = psycopg2.connect(dbname= rds_dbname, host=rds_host, port=rds_port, user= rds_user, password= rds_password)
 
     sql_01 = """select erp_cstmr_no as cid, addrse_addr as addr, max(ord_dt) as date
-                from fnf.fec.vw_ord_detail vod
+                from 
                 where erp_cstmr_no is not null
                 and addrse_addr is not null
                 and dlv_pkup_shop_id in ('M510', 'X30004', 'I50002')
@@ -353,7 +353,7 @@ def join_sale_data(df_result, df_cust_raw) :
     con = psycopg2.connect(dbname= rds_dbname, host=rds_host, port=rds_port, user= rds_user, password= rds_password)
 
     sql_01 = """select cid, sum(amt_act) as amt_act
-                from ax.vw_f_anl_sales
+                from 
                 where del_yn = 'N'
                 and saledate::date > dateadd(day, -365, CURRENT_DATE)::date
                 and amt_act > 0
@@ -447,7 +447,7 @@ def load_target_data_to_mc(target_store_df) :
 
     sql_query = """
                 SELECT cid__c as cid, phone_mobile__c as mobile, name, joinbrand__c as brand
-                FROM salesforceprod.v_personaccount
+                FROM 
                 WHERE name not in ('탈퇴고객')
                 and ispersonaccount = True
                 and recv_sms__c = 'Y'
