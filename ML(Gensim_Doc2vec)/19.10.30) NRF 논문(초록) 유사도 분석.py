@@ -125,7 +125,7 @@ print("모델 Load 완료.\n")
 ###################################################################################
 
 # chk_paper_id에 비교를 원하는 논문ID를 입력
-chk_paper_id = 'ART002100789'
+chk_paper_id = 'ART002OOOOOO'
 chk_paper_num = paper_id.index(chk_paper_id)
 cp_paper = mydoclist_kkma[chk_paper_num].split(" ")
 
